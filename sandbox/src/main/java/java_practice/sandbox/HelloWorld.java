@@ -1,3 +1,5 @@
+package java_practice.sandbox;
+
 public class HelloWorld {
 
    public static void main(String[] args) {
