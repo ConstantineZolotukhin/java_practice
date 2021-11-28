@@ -10,10 +10,10 @@ public class Point {
      this.y = y;
    }
 
-   public static double distance(Point p1, Point p2) {
+   public double distance(Point p) {
 
-      double length = p1.x - p2.x;
-      double height = p1.y - p2.y;
+      double length = p.x - x;
+      double height = p.y - y;
 
       return Math.sqrt(length * length + height * height);
    }
