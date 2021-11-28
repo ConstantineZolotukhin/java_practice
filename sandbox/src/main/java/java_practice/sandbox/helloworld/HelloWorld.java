@@ -1,4 +1,4 @@
-package java_practice.sandbox;
+package java_practice.sandbox.helloworld;
 
 public class HelloWorld {
 
