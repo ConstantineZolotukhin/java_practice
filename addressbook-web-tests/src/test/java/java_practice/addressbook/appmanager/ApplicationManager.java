@@ -2,7 +2,6 @@ package java_practice.addressbook.appmanager;
 
 import java_practice.addressbook.model.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,15 +39,6 @@ public class ApplicationManager {
        wd.findElement(by);
        return true;
      } catch (NoSuchElementException e) {
-       return false;
-     }
-   }
-
-   private boolean isAlertPresent() {
-     try {
-       wd.switchTo().alert();
-       return true;
-     } catch (NoAlertPresentException e) {
        return false;
      }
    }
