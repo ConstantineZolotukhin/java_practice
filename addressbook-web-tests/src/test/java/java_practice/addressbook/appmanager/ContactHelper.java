@@ -1,7 +1,6 @@
 package java_practice.addressbook.appmanager;
 
 import java_practice.addressbook.model.ContactData;
-import java_practice.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -29,7 +28,7 @@ public class ContactHelper extends HelperBase {
 
    public void deleteContact() {
       click(By.xpath("//input[@value='Delete']"));
-      if(isAlertPresent())
+      if (isAlertPresent())
          wd.switchTo().alert().accept();
    }
 
@@ -37,6 +36,12 @@ public class ContactHelper extends HelperBase {
       click(By.name("theform"));
       click(By.xpath("//div[@id='content']/form/input[21]"));
    }
+
+   public void initContactModification() {
+      click(By.xpath("//img[@alt='Edit']"));
+   }
+
+   public void submitContactModification() {
+      click(By.name("update"));
+   }
 }
-
-
