@@ -1,6 +1,5 @@
 package java_practice.addressbook.appmanager;
 
-import java_practice.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -8,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
-
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
@@ -33,7 +31,7 @@ public class ApplicationManager {
          wd = new InternetExplorerDriver();
       }
       wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-      wd.get("http://localhost/addressbook/");
+      wd.get("http://localhost/addressbook");
       contactHelper = new ContactHelper(wd);
       groupHelper = new GroupHelper(wd);
       navigationHelper = new NavigationHelper(wd);
