@@ -48,6 +48,10 @@ public class ContactHelper extends HelperBase {
       click(By.xpath("//div[@id='content']/form/input[21]"));
    }
 
+   public void homePage() {
+      click(By.linkText("home"));
+   }
+
    public void initContactModification() {
       click(By.xpath("//img[@alt='Edit']"));
    }
@@ -60,17 +64,31 @@ public class ContactHelper extends HelperBase {
       return isElementPresent(By.name("selected[]"));
    }
 
-   public void createContact(ContactData contact) {
+   public void create(ContactData contact) {
       initContactCreation();
       fillContactForm(contact, true);
       submitContactCreation();
+   }
+
+   public void modify(ContactData contact) {
+      selectContact(0);
+      initContactModification();
+      fillContactForm(contact, false);
+      submitContactModification();
+      homePage();
+   }
+
+   public void delete(int index) {
+      selectContact(index);
+      deleteContact();
+      homePage();
    }
 
    public int getContactCount() {
       return wd.findElements(By.name("selected[]")).size();
    }
 
-   public List<ContactData> getContactList() {
+   public List<ContactData> list() {
       List<ContactData> contacts = new ArrayList<ContactData>();
       List<WebElement> elements = wd.findElements(By.name("entry"));
       for (WebElement element : elements) {
