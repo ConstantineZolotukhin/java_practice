@@ -8,12 +8,12 @@ import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
 
- @BeforeMethod
- public void ensurePreconditions() {
-  app.goTo().groupPage();
-  if (app.group().list().size() == 0) {
-   app.group().create(new GroupData("First Test Group", "Group Header", "Group Footer"));
-  }
+  @BeforeMethod
+  public void ensurePreconditions() {
+   app.goTo().groupPage();
+   if (app.group().list().size() == 0) {
+    app.group().create(new GroupData().withName("First Test Group"));
+   }
  }
 
  @Test

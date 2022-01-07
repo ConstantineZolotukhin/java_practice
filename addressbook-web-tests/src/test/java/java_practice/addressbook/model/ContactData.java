@@ -3,46 +3,41 @@ package java_practice.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-   private int id;
-   private final String firstName;
-   private final String lastName;
-   private final String address;
-   private final String mail;
-   private final String phone;
+   private int id = Integer.MAX_VALUE;;
+   private String firstName;
+   private String lastName;
+   private String address;
+   private String mail;
+   private String phone;
    private String group;
 
-   public void setId(int id) {
+   public ContactData withId(int id) {
       this.id = id;
+      return this;
    }
-
-   public ContactData(int id, String firstName, String lastName, String address, String mail, String phone, String group) {
-      this.id = id;
+   public ContactData withFirstName(String firstName) {
       this.firstName = firstName;
+      return this;
+   }
+   public ContactData withLastName(String lastName) {
       this.lastName = lastName;
+      return this;
+   }
+   public ContactData withAddress(String address) {
       this.address = address;
-      this.mail = mail;
-      this.phone = phone;
-      this.group = group;
+      return this;
    }
-
-   public ContactData(int id, String firstName, String lastName) {
-      this.id = id;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.address = null;
-      this.mail = null;
-      this.phone = null;
-      this.group = null;
-   }
-
-   public ContactData(String firstName, String lastName, String address, String mail, String phone, String group) {
-      this.id = Integer.MAX_VALUE;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.address = address;
+   public ContactData withMail(String mail) {
       this.mail = mail;
+      return this;
+   }
+   public ContactData withPhone(String phone) {
       this.phone = phone;
+      return this;
+   }
+   public ContactData withGroup(String group) {
       this.group = group;
+      return this;
    }
 
    public String getFirstName() {
