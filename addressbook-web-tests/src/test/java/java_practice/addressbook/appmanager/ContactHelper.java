@@ -1,12 +1,12 @@
 package java_practice.addressbook.appmanager;
 
 import java_practice.addressbook.model.ContactData;
+import java_practice.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -37,6 +37,10 @@ public class ContactHelper extends HelperBase {
       wd.findElements(By.name("selected[]")).get(index).click();
    }
 
+   public void selectContactById(int id) {
+      wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+   }
+
    public void deleteContact() {
       click(By.xpath("//input[@value='Delete']"));
       if (isAlertPresent())
@@ -52,8 +56,8 @@ public class ContactHelper extends HelperBase {
       click(By.linkText("home"));
    }
 
-   public void initContactModification() {
-      click(By.xpath("//img[@alt='Edit']"));
+   public void initContactModification(int id) {
+      click(By.xpath("//a[@href=\"edit.php?id=" + id + "\"]"));
    }
 
    public void submitContactModification() {
@@ -71,15 +75,14 @@ public class ContactHelper extends HelperBase {
    }
 
    public void modify(ContactData contact) {
-      selectContact(0);
-      initContactModification();
+      initContactModification(contact.getId());
       fillContactForm(contact, false);
       submitContactModification();
       homePage();
    }
 
-   public void delete(int index) {
-      selectContact(index);
+   public void delete(ContactData contact) {
+      selectContactById(contact.getId());
       deleteContact();
       homePage();
    }
@@ -88,8 +91,8 @@ public class ContactHelper extends HelperBase {
       return wd.findElements(By.name("selected[]")).size();
    }
 
-   public List<ContactData> list() {
-      List<ContactData> contacts = new ArrayList<ContactData>();
+   public Contacts all() {
+      Contacts contacts = new Contacts();
       List<WebElement> elements = wd.findElements(By.name("entry"));
       for (WebElement element : elements) {
          String firstname = element.findElements(By.tagName("td")).get(2).getText();
