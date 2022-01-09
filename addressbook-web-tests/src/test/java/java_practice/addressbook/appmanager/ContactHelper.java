@@ -112,7 +112,7 @@ public class ContactHelper extends HelperBase {
          String firstname = cells.get(2).getText();
          String address = cells.get(3).getText();
          String email = cells.get(4).getText();
-         String[] phones = cells.get(5).getText().split("\n");
+         String allPhones = cells.get(5).getText();
          int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
          contactCache.add(new ContactData()
                  .withId(id)
@@ -120,9 +120,7 @@ public class ContactHelper extends HelperBase {
                  .withLastName(lastname)
                  .withAddress(address)
                  .withMail(email)
-                 .withHomePhone(phones[0])
-                 .withMobilePhone(phones[1])
-                 .withWorkPhone(phones[2]));
+                 .withAllPhones(allPhones));
 
       }
       return new Contacts(contactCache);
