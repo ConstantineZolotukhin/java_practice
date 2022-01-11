@@ -1,5 +1,6 @@
 package java_practice.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class GroupData {
