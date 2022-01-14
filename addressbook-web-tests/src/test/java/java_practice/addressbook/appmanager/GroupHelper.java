@@ -1,11 +1,11 @@
 package java_practice.addressbook.appmanager;
 
-import java_practice.addressbook.model.Contacts;
 import java_practice.addressbook.model.GroupData;
 import java_practice.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import java.util.List;
 
 public class GroupHelper extends HelperBase {
@@ -18,16 +18,16 @@ public class GroupHelper extends HelperBase {
       click(By.name("new"));
    }
 
-   public void returnToGroupPage() {
-      click(By.linkText("group page"));
-   }
-
-   public void submitGroupCreation() { click(By.name("submit")); }
-
    public void fillGroupForm(GroupData groupData) {
       type(By.name("group_name"), groupData.getName());
       type(By.name("group_header"), groupData.getHeader());
       type(By.name("group_footer"), groupData.getFooter());
+   }
+
+   public void submitGroupCreation() { click(By.name("submit")); }
+
+   public void returnToGroupPage() {
+      click(By.linkText("group page"));
    }
 
    public void deleteSelectedGroups() {

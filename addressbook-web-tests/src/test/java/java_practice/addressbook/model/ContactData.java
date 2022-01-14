@@ -1,33 +1,38 @@
 package java_practice.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
-   private int id = Integer.MAX_VALUE;;
+   private int id = Integer.MAX_VALUE;
+   @Expose
    private String firstName;
+   @Expose
    private String lastName;
+   @Expose
    private String address;
+   @Expose
    private String firstMail;
+   @Expose
    private String secondMail;
+   @Expose
    private String thirdMail;
+   @Expose
    private String homePhone;
+   @Expose
    private String mobilePhone;
+   @Expose
    private String workPhone;
+   @Expose
    private String allPhones;
+   @Expose
    private String group;
+   @Expose
    private String allEmails;
+   @Expose
    private File photo;
-
-   public ContactData withAllPhones(String allPhones) {
-      this.allPhones = allPhones;
-      return this;
-   }
-
-   public ContactData withId(int id) {
-      this.id = id;
-      return this;
-   }
 
    public ContactData withFirstName(String firstName) {
       this.firstName = firstName;
@@ -74,6 +79,11 @@ public class ContactData {
       return this;
    }
 
+   public ContactData withAllPhones(String allPhones) {
+      this.allPhones = allPhones;
+      return this;
+   }
+
    public ContactData withGroup(String group) {
       this.group = group;
       return this;
@@ -86,6 +96,11 @@ public class ContactData {
 
    public ContactData withPhoto(File photo) {
       this.photo = photo;
+      return this;
+   }
+
+   public ContactData withId(int id) {
+      this.id = id;
       return this;
    }
 
@@ -111,10 +126,6 @@ public class ContactData {
 
    public String getThirdEmail() {
       return thirdMail;
-   }
-
-   public int getId() {
-      return id;
    }
 
    public String getHomePhone() {
@@ -145,13 +156,8 @@ public class ContactData {
       return photo;
    }
 
-   @Override
-   public String toString() {
-      return "ContactData{" +
-              "id='" + id + '\'' +
-              ", firstName='" + firstName + '\'' +
-              ", lastName='" + lastName + '\'' +
-              '}';
+   public int getId() {
+      return id;
    }
 
    @Override
@@ -160,6 +166,15 @@ public class ContactData {
       if (o == null || getClass() != o.getClass()) return false;
       ContactData that = (ContactData) o;
       return id == that.id && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
+   }
+
+   @Override
+   public String toString() {
+      return "ContactData{" +
+              "id='" + id + '\'' +
+              ", firstName='" + firstName + '\'' +
+              ", lastName='" + lastName + '\'' +
+              '}';
    }
 
    @Override
