@@ -1,38 +1,78 @@
 package java_practice.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+   @Id
+   @Column(name = "id")
    private int id = Integer.MAX_VALUE;
+
    @Expose
+   @Column(name = "firstname")
    private String firstName;
+
    @Expose
+   @Column(name = "lastname")
    private String lastName;
+
    @Expose
+   @Column(name = "address")
+   @Type(type = "text")
    private String address;
+
    @Expose
+   @Column(name = "email")
+   @Type(type = "text")
    private String firstMail;
+
    @Expose
+   @Column(name = "email2")
+   @Type(type = "text")
    private String secondMail;
+
    @Expose
+   @Column(name = "email3")
+   @Type(type = "text")
    private String thirdMail;
+
    @Expose
+   @Column(name = "home")
+   @Type(type = "text")
    private String homePhone;
+
    @Expose
+   @Column(name = "mobile")
+   @Type(type = "text")
    private String mobilePhone;
+
    @Expose
+   @Column(name = "work")
+   @Type(type = "text")
    private String workPhone;
+
    @Expose
-   private String allPhones;
-   @Expose
+   @Transient
    private String group;
+
    @Expose
+   @Transient
    private String allEmails;
+
    @Expose
-   private File photo;
+   @Transient
+   private String allPhones;
+
+   @Expose
+   @Column(name = "photo")
+   @Type(type = "text")
+   private String photo;
 
    public ContactData withFirstName(String firstName) {
       this.firstName = firstName;
@@ -95,7 +135,7 @@ public class ContactData {
    }
 
    public ContactData withPhoto(File photo) {
-      this.photo = photo;
+      this.photo = photo.getPath();
       return this;
    }
 
@@ -153,7 +193,9 @@ public class ContactData {
    }
 
    public File getPhoto() {
-      return photo;
+      if(photo == null)
+         return null;
+      return new File(photo);
    }
 
    public int getId() {
@@ -181,6 +223,4 @@ public class ContactData {
    public int hashCode() {
       return Objects.hash(id, firstName, lastName);
    }
-
-
 }
