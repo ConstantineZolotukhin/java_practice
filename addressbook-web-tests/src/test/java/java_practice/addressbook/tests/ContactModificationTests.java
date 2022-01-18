@@ -4,6 +4,7 @@ import java_practice.addressbook.model.ContactData;
 import java_practice.addressbook.model.Contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -13,7 +14,7 @@ public class ContactModificationTests extends TestBase {
    @BeforeMethod
    public void ensurePreconditions() {
       if (app.db().contacts().size() == 0) {
-          app.contact().create(new ContactData()
+         app.contact().create(new ContactData()
                  .withFirstName("FirstName")
                  .withLastName("LastName")
                  .withAddress("33 Main St, City")
@@ -26,7 +27,7 @@ public class ContactModificationTests extends TestBase {
    }
 
    @Test
-   public void testContactModification () {
+   public void testContactModification() {
       app.goTo().homePage();
       Contacts before = app.db().contacts();
       ContactData modifiedContact = before.iterator().next();
@@ -43,5 +44,6 @@ public class ContactModificationTests extends TestBase {
       assertThat(app.contact().count(), equalTo(before.size()));
       Contacts after = app.db().contacts();
       assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
+      verifyContactListInUI();
    }
 }
