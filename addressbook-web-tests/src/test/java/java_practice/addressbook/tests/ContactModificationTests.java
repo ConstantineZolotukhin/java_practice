@@ -21,8 +21,7 @@ public class ContactModificationTests extends TestBase {
                  .withFirstEmail("address@mail.com")
                  .withHomePhone("111")
                  .withMobilePhone("222")
-                 .withWorkPhone("333")
-                 .withGroup("First Test Group"));
+                 .withWorkPhone("333"));
       }
    }
 

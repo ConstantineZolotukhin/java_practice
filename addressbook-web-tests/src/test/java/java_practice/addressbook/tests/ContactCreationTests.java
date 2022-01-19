@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import java_practice.addressbook.model.ContactData;
 import java_practice.addressbook.model.Contacts;
 import java_practice.addressbook.model.GroupData;
+import java_practice.addressbook.model.Groups;
 import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -38,7 +39,6 @@ public class ContactCreationTests extends TestBase {
                     .withHomePhone(split[4])
                     .withMobilePhone(split[5])
                     .withWorkPhone(split[6])
-                    .withGroup(split[7])
                     .withPhoto(file)});
             line = reader.readLine();
          }
@@ -66,6 +66,13 @@ public class ContactCreationTests extends TestBase {
 
    @Test(dataProvider = "validContactsFromJson")
    public void testContactCreation(ContactData contact) throws Exception {
+      Groups groups = app.db().groups();
+      File photo = new File("src/test/resources/stru.png");
+      ContactData newContact = new ContactData()
+              .withFirstName("firstname")
+              .withLastName("lastname")
+              .withPhoto(photo)
+              .inGroup(groups.iterator().next());
       app.goTo().homePage();
       Contacts before = app.db().contacts();
       app.contact().create(contact);
