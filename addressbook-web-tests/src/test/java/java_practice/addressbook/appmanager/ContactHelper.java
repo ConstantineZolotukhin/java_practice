@@ -2,6 +2,7 @@ package java_practice.addressbook.appmanager;
 
 import java_practice.addressbook.model.ContactData;
 import java_practice.addressbook.model.Contacts;
+import java_practice.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -75,8 +76,18 @@ public class ContactHelper extends HelperBase {
       click(By.name("update"));
    }
 
+   public void selectGroupDropdown(int id) {
+      click(By.name("to_group"));
+      Select select = new Select(wd.findElement(By.name("to_group")));
+      select.selectByValue(String.valueOf(id));
+   }
+
    public boolean isThereAContact() {
       return isElementPresent(By.name("selected[]"));
+   }
+
+   public void submitContactAddToGroup() {
+      click(By.name("add"));
    }
 
    public void create(ContactData contact) {
@@ -99,6 +110,13 @@ public class ContactHelper extends HelperBase {
       deleteContact();
       contactCache = null;
       homePage();
+   }
+
+   public void addToGroup(ContactData contact, GroupData group) {
+      selectContactById(contact.getId());
+      selectGroupDropdown(group.getId());
+      submitContactAddToGroup();
+      contactCache = null;
    }
 
    public int count() {

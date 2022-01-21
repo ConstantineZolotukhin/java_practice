@@ -30,13 +30,14 @@ public class GroupData {
    @Type(type = "text")
    private String footer;
 
-   @ManyToMany(mappedBy = "groups")
+   @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
    private Set<ContactData> contacts = new HashSet<ContactData>();
 
    public GroupData withName(String name) {
       this.name = name;
       return this;
    }
+
    public GroupData withHeader(String header) {
       this.header = header;
       return this;

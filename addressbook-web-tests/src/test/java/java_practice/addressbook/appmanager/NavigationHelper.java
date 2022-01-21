@@ -9,11 +9,16 @@ public class NavigationHelper extends HelperBase {
       super(wd);
    }
 
-   public void groupPage() {
+   public void groupsPage() {
      click(By.linkText("groups"));
    }
 
    public void homePage() {
       click(By.linkText("home"));
+   }
+
+   public void groupPage(int id) {
+//      click(By.linkText("group page \"" + name + "\""));
+      click(By.xpath("//a[@href=\"./?group=" + id + "\"]"));
    }
 }
