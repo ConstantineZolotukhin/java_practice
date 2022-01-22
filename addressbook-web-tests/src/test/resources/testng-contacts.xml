@@ -3,12 +3,12 @@
 <suite name="Suite1" verbose="1" >
     <test name="Contacts">
         <classes>
-            <class name="java_practice.addressbook.tests.ContactCreationTests"/>
-            <class name="java_practice.addressbook.tests.ContactModificationTests"/>
-            <class name="java_practice.addressbook.tests.ContactDeletionTests"/>
-            <class name="java_practice.addressbook.tests.ContactAddressTests"/>
-            <class name="java_practice.addressbook.tests.ContactEmailsTests"/>
-            <class name="java_practice.addressbook.tests.ContactPhoneTests"/>
+            <class name="java_practice.addressbook.java_practice.mantis.tests.ContactCreationTests"/>
+            <class name="java_practice.addressbook.java_practice.mantis.tests.ContactModificationTests"/>
+            <class name="java_practice.addressbook.java_practice.mantis.tests.ContactDeletionTests"/>
+            <class name="java_practice.addressbook.java_practice.mantis.tests.ContactAddressTests"/>
+            <class name="java_practice.addressbook.java_practice.mantis.tests.ContactEmailsTests"/>
+            <class name="java_practice.addressbook.java_practice.mantis.tests.ContactPhoneTests"/>
         </classes>
     </test>
 </suite>

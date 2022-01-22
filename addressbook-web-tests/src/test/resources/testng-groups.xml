@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Groups" >
         <classes>
-            <class name="java_practice.addressbook.tests.GroupCreationTests" />
-            <class name="java_practice.addressbook.tests.GroupModificationTests" />
-            <class name="java_practice.addressbook.tests.GroupDeletionTests" />
+            <class name="java_practice.addressbook.java_practice.mantis.tests.GroupCreationTests" />
+            <class name="java_practice.addressbook.java_practice.mantis.tests.GroupModificationTests" />
+            <class name="java_practice.addressbook.java_practice.mantis.tests.GroupDeletionTests" />
         </classes>
     </test>
 </suite>
