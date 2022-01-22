@@ -3,6 +3,7 @@ package java_practice.addressbook.appmanager;
 import java_practice.addressbook.model.ContactData;
 import java_practice.addressbook.model.Contacts;
 import java_practice.addressbook.model.GroupData;
+import java_practice.addressbook.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,8 +14,14 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
-   public ContactHelper(WebDriver wd) {
+   private DbHelper dbHelper;
+
+   private NavigationHelper navigationHelper;
+
+   public ContactHelper(WebDriver wd, DbHelper dbHelper, NavigationHelper navigationHelper) {
       super(wd);
+      this.dbHelper = dbHelper;
+      this.navigationHelper = navigationHelper;
    }
 
    public void initContactCreation() {
@@ -82,12 +89,22 @@ public class ContactHelper extends HelperBase {
       select.selectByValue(String.valueOf(id));
    }
 
+   public void selectGroupFilterDropdown(int id) {
+      click(By.name("group"));
+      Select select = new Select(wd.findElement(By.name("group")));
+      select.selectByValue(String.valueOf(id));
+   }
+
    public boolean isThereAContact() {
       return isElementPresent(By.name("selected[]"));
    }
 
    public void submitContactAddToGroup() {
       click(By.name("add"));
+   }
+
+   public void submitContactDeleteFromGroup() {
+      click(By.name("remove"));
    }
 
    public void create(ContactData contact) {
@@ -117,6 +134,17 @@ public class ContactHelper extends HelperBase {
       selectGroupDropdown(group.getId());
       submitContactAddToGroup();
       contactCache = null;
+   }
+
+   public ContactData contactAddingToGroup() {
+      homePage();
+      Contacts contactsList = dbHelper.contacts();
+      ContactData addedContact = contactsList.iterator().next();
+      Groups groupsList = dbHelper.groups();
+      GroupData group = groupsList.iterator().next();
+      addToGroup(addedContact, group);
+      navigationHelper.groupPage(group.getId());
+      return addedContact;
    }
 
    public int count() {

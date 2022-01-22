@@ -8,10 +8,14 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.security.acl.Group;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactAddToGroupTest extends TestBase {
+public class ContactDeleteFromGroupTest extends TestBase {
+
+   ContactData addedContact;
 
    @BeforeMethod
    public void ensurePreconditions() {
@@ -25,17 +29,29 @@ public class ContactAddToGroupTest extends TestBase {
                  .withMobilePhone("222")
                  .withWorkPhone("333"));
       }
-
       if (app.db().groups().size() == 0) {
          app.goTo().groupsPage();
          app.group().create(new GroupData().withName("First Test Group"));
       }
+      addedContact = app.contact().contactAddingToGroup();
    }
 
    @Test
-   public void testAddToGroup() {
-      ContactData addedContact = app.contact().contactAddingToGroup();
-      Assert.assertTrue(app.contact().all().contains(addedContact));
+   public void testDeleteFromGroup() {
+      Groups groups = app.db().groups();
+      GroupData fromGroup = null;
+      for(GroupData group : groups) {
+         if(group.getContacts().contains(addedContact)) {
+            fromGroup = group;
+         }
+      }
+      app.contact().selectGroupFilterDropdown(fromGroup.getId());
+      app.contact().selectContactById(addedContact.getId());
+      app.contact().submitContactDeleteFromGroup();
+      app.goTo().groupPage(fromGroup.getId());
+      Contacts after = app.contact().all();
+      assertThat(after.size(), equalTo(fromGroup.getContacts().size() - 1));
+      Assert.assertFalse(after.contains(addedContact));
       verifyContactListInUI();
    }
 }
