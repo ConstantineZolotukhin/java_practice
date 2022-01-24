@@ -17,7 +17,7 @@ public class ApplicationManager {
    private WebDriver wd;
 
    private String browser;
-   private RegistrationHelper registrationHelper;
+   private MantisHelper mantisHelper;
    private MailHelper mailHelper;
 
    public ApplicationManager(String browser) {
@@ -44,11 +44,11 @@ public class ApplicationManager {
       return properties.getProperty(key);
    }
 
-   public RegistrationHelper registration() {
-      if (registrationHelper == null) {
-         registrationHelper = new RegistrationHelper(this);
+   public MantisHelper mantis() {
+      if (mantisHelper == null) {
+         mantisHelper = new MantisHelper(this);
       }
-      return registrationHelper;
+      return mantisHelper;
    }
 
    public WebDriver getDriver() {
