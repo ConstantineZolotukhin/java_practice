@@ -81,4 +81,8 @@ public class ApplicationManager {
    public DbHelper db() {
       return dbHelper;
    }
+
+   public String getProperty(String propertyName) {
+      return properties.getProperty(propertyName);
+   }
 }

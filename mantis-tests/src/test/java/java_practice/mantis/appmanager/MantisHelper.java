@@ -1,11 +1,16 @@
 package java_practice.mantis.appmanager;
 
+import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
+import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
 import java_practice.mantis.model.MailMessage;
 import org.openqa.selenium.By;
 import ru.lanwen.verbalregex.VerbalExpression;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -63,4 +68,10 @@ public class MantisHelper extends HelperBase {
       String resetLink = findLink(mailMessages, email, "Your password has been reset");
       finish(resetLink, password);
    }
+
+   public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException {
+      return new MantisConnectLocator()
+              .getMantisConnectPort(new URL(app.getProperty("web.baseUrl") + app.getProperty("web.soapUrl")));
+   }
 }
+
