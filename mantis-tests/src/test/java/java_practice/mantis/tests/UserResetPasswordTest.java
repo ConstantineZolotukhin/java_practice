@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 
 import static org.testng.Assert.assertTrue;
@@ -18,7 +19,8 @@ public class UserResetPasswordTest extends TestBase {
    String email;
 
    @BeforeMethod
-   public void testRegistration() throws MessagingException, IOException {
+   public void testRegistration() throws MessagingException, IOException, ServiceException {
+      skipIfNotFixed(1);
       app.mail().start();
       long now = System.currentTimeMillis();
       user = String.format("user%s", now);
