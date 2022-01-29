@@ -1,4 +1,6 @@
-package java_practice.rest;
+package java_practice.rest.model;
+
+import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
@@ -7,6 +9,18 @@ public class Issue {
    private int id;
    private String subject;
    private String description;
+
+   @SerializedName(value = "state_name")
+   private String status;
+
+   public String getStatus() {
+      return status;
+   }
+
+   public Issue withStatus(String status) {
+      this.status = status;
+      return this;
+   }
 
    public int getId() {
       return id;
