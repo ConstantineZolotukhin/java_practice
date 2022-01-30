@@ -14,9 +14,12 @@ public class ContactEmailsTests extends TestBase {
    @Test
    public void testContactEmails() {
       app.goTo().homePage();
+      app.contact().cleanGroupFilterDropdown();
       ContactData contact = app.db().contacts().iterator().next();
       ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-      assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+      assertThat(contact.getFirstEmail(), equalTo(contactInfoFromEditForm.getFirstEmail()));
+      assertThat(contact.getSecondEmail(), equalTo(contactInfoFromEditForm.getSecondEmail()));
+      assertThat(contact.getThirdEmail(), equalTo(contactInfoFromEditForm.getThirdEmail()));
    }
 
    private String mergeEmails(ContactData contact) {

@@ -74,6 +74,7 @@ public class ContactCreationTests extends TestBase {
               .withPhoto(photo)
               .inGroup(groups.iterator().next());
       app.goTo().homePage();
+      app.contact().cleanGroupFilterDropdown();
       Contacts before = app.db().contacts();
       app.contact().create(contact);
       app.goTo().homePage();

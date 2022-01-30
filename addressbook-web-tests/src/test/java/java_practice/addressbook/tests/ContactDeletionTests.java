@@ -21,6 +21,7 @@ public class ContactDeletionTests extends TestBase {
    @Test
    public void testContactDeletion() throws Exception {
       app.goTo().homePage();
+      app.contact().cleanGroupFilterDropdown();
       Contacts before = app.db().contacts();
       ContactData deletedContact = before.iterator().next();
       app.contact().delete(deletedContact);

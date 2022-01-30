@@ -95,6 +95,12 @@ public class ContactHelper extends HelperBase {
       select.selectByValue(String.valueOf(id));
    }
 
+   public void cleanGroupFilterDropdown() {
+      click(By.name("group"));
+      Select select = new Select(wd.findElement(By.name("group")));
+      select.selectByVisibleText("[all]");
+   }
+
    public boolean isThereAContact() {
       return isElementPresent(By.name("selected[]"));
    }

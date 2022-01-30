@@ -27,6 +27,7 @@ public class ContactModificationTests extends TestBase {
    @Test
    public void testContactModification() {
       app.goTo().homePage();
+      app.contact().cleanGroupFilterDropdown();
       Contacts before = app.db().contacts();
       ContactData modifiedContact = before.iterator().next();
       ContactData contact = new ContactData()
