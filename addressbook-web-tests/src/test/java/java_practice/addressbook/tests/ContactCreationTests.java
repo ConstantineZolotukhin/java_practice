@@ -6,6 +6,7 @@ import java_practice.addressbook.model.Contacts;
 import java_practice.addressbook.model.GroupData;
 import java_practice.addressbook.model.Groups;
 import org.openqa.selenium.json.TypeToken;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -61,6 +62,14 @@ public class ContactCreationTests extends TestBase {
          List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
          }.getType());
          return contacts.stream().map((c) -> new Object[]{c.withPhoto(file)}).collect(Collectors.toList()).iterator();
+      }
+   }
+
+   @BeforeMethod
+   public void ensurePreconditions() {
+      app.goTo().groupsPage();
+      if (app.db().groups().size() == 0) {
+         app.group().create(new GroupData().withName("First Test Group"));
       }
    }
 
