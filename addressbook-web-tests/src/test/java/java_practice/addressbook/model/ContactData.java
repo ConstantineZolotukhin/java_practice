@@ -60,6 +60,11 @@ public class ContactData {
    private String workPhone;
 
    @Expose
+   @Column(name = "phone2")
+   @Type(type = "text")
+   private String secondaryHomePhone;
+
+   @Expose
    @Transient
    private String allEmails;
 
@@ -127,6 +132,11 @@ public class ContactData {
       return this;
    }
 
+   public ContactData withSecondaryHomePhone(String secondaryHomePhone) {
+      this.secondaryHomePhone = secondaryHomePhone;
+      return this;
+   }
+
    public ContactData withAllEmails(String allEmails) {
       this.allEmails = allEmails;
       return this;
@@ -184,6 +194,10 @@ public class ContactData {
 
    public String getAllPhones() {
      return allPhones;
+   }
+
+   public String getSecondaryHomePhone() {
+      return secondaryHomePhone;
    }
 
    public String getAllEmails() {
