@@ -33,7 +33,11 @@ public class ContactDeleteFromGroupTest extends TestBase {
          app.goTo().groupsPage();
          app.group().create(new GroupData().withName("First Test Group"));
       }
-      addedContact = app.contact().contactAddingToGroup();
+      Contacts contactsList = app.db().contacts();
+      addedContact = contactsList.iterator().next();
+      Groups groupsList = app.db().groups();
+      GroupData group = groupsList.iterator().next();
+      app.contact().contactAddingToGroup(addedContact, group);
    }
 
    @Test

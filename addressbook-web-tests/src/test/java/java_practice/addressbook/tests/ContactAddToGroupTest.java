@@ -13,29 +13,36 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactAddToGroupTest extends TestBase {
 
+   ContactData contact;
+   GroupData group;
+
    @BeforeMethod
    public void ensurePreconditions() {
-      if (app.db().contacts().size() == 0) {
-         app.contact().create(new ContactData()
-                 .withFirstName("FirstName")
+      long now = System.currentTimeMillis();
+      String contactName = String.format("FirstName%s", now);
+      app.contact().create(new ContactData()
+                 .withFirstName(contactName)
                  .withLastName("LastName")
                  .withAddress("33 Main St, City")
                  .withFirstEmail("address@mail.com")
                  .withHomePhone("111")
                  .withMobilePhone("222")
                  .withWorkPhone("333"));
-      }
+      contact = app.db().contacts().stream().filter(c -> c.getFirstName().equals(contactName)).findFirst().get();
 
-      if (app.db().groups().size() == 0) {
-         app.goTo().groupsPage();
-         app.group().create(new GroupData().withName("First Test Group"));
-      }
+      app.goTo().groupsPage();
+      String groupName = String.format("First Test Group%s", now);
+      app.group().create(new GroupData().withName(groupName));
+      group = app.db().groups().stream().filter(g -> g.getName().equals(groupName)).findFirst().get();
    }
 
    @Test
    public void testAddToGroup() {
-      ContactData addedContact = app.contact().contactAddingToGroup();
-      Assert.assertTrue(app.contact().all().contains(addedContact));
+      app.contact().contactAddingToGroup(contact, group);
+      Assert.assertTrue(app.contact().all().contains(contact));
       verifyContactListInUI();
    }
 }
+
+
+

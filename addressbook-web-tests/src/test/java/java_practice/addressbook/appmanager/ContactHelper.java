@@ -143,15 +143,10 @@ public class ContactHelper extends HelperBase {
       contactCache = null;
    }
 
-   public ContactData contactAddingToGroup() {
+   public void contactAddingToGroup(ContactData contact, GroupData group) {
       homePage();
-      Contacts contactsList = dbHelper.contacts();
-      ContactData addedContact = contactsList.iterator().next();
-      Groups groupsList = dbHelper.groups();
-      GroupData group = groupsList.iterator().next();
-      addToGroup(addedContact, group);
+      addToGroup(contact, group);
       navigationHelper.groupPage(group.getId());
-      return addedContact;
    }
 
    public int count() {
