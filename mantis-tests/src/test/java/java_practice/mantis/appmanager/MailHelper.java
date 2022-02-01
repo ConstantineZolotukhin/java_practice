@@ -48,7 +48,11 @@ public class MailHelper {
    }
 
    public void start() {
-      wiser.start();
+      try {
+         wiser.start();
+      } catch (IllegalStateException i) {
+
+      }
    }
 
    public void stop() {

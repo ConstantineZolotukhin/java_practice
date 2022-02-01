@@ -19,7 +19,7 @@ public class UserResetPasswordTest extends TestBase {
    String email;
 
    @BeforeMethod
-   public void testRegistration() throws MessagingException, IOException, ServiceException {
+   public void precondition() throws MessagingException, IOException, ServiceException {
       skipIfNotFixed(1);
       app.mail().start();
       long now = System.currentTimeMillis();

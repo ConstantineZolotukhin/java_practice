@@ -60,8 +60,8 @@ public class MantisHelper extends HelperBase {
    }
 
    public void userPasswordReset(String username, String email, String password) throws MessagingException, IOException {
-      click(By.cssSelector("a[href=\"/mantisbt-2.25.2/manage_overview_page.php\"]"));
-      click(By.cssSelector("a[href=\"/mantisbt-2.25.2/manage_user_page.php\"]"));
+      click(By.cssSelector("a[href=\"" + app.getProperty("web.mantisUrl") + "/manage_overview_page.php\"]"));
+      click(By.cssSelector("a[href=\"" + app.getProperty("web.mantisUrl") + "/manage_user_page.php\"]"));
       click(By.xpath("//a[text()=\"" + username + "\"]"));
       click(By.xpath("//form[@id=\"manage-user-reset-form\"]//input[@type=\"submit\"]"));
       List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
