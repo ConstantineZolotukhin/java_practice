@@ -1,6 +1,7 @@
 package java_practice.addressbook.tests;
 
 import java_practice.addressbook.model.ContactData;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.Arrays;
@@ -19,31 +20,19 @@ public class AdditionalInfoContactTests extends TestBase {
       app.goTo().homePage();
       app.contact().cleanGroupFilterDropdown();
       expected = app.db().contacts().iterator().next();
-      actual = app.contact().infoFromEditForm(expected);
+      actual = app.contact().all().stream().filter(c -> c.getId() == expected.getId()).findFirst().get();
    }
 
    @Test
-   public void testContactPhones() {
-      assertThat(expected.getHomePhone(), equalTo(actual.getHomePhone()));
-      assertThat(expected.getMobilePhone(), equalTo(actual.getMobilePhone()));
-      assertThat(expected.getWorkPhone(), equalTo(actual.getWorkPhone()));
-      assertThat(expected.getSecondaryHomePhone(), equalTo(actual.getSecondaryHomePhone()));
-   }
-
-   @Test
-   public void testContactEmails() {
-      assertThat(expected.getFirstEmail(), equalTo(actual.getFirstEmail()));
-      assertThat(expected.getSecondEmail(), equalTo(actual.getSecondEmail()));
-      assertThat(expected.getThirdEmail(), equalTo(actual.getThirdEmail()));
-   }
-
-   @Test
-   public void testContactAddress() {
+   public void testAdditionalInfoContact() {
+      assertThat(mergePhones(expected), equalTo(actual.getAllPhones()));
+      assertThat(mergeEmails(expected), equalTo(actual.getAllEmails()));
       assertThat(expected.getAddress(), equalTo(actual.getAddress()));
+
    }
 
    private String mergePhones(ContactData contact) {
-      return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+      return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getSecondaryHomePhone())
               .stream().filter((s) -> ! s.equals(""))
               .map(AdditionalInfoContactTests::cleaned)
               .collect(Collectors.joining("\n"));
