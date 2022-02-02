@@ -39,7 +39,8 @@ public class ContactAddToGroupTest extends TestBase {
    @Test
    public void testAddToGroup() {
       app.contact().contactAddingToGroup(contact, group);
-      Assert.assertTrue(app.contact().all().contains(contact));
+      contact = app.db().contacts().stream().filter(c -> c.getFirstName().equals(contact.getFirstName())).findFirst().get();
+      Assert.assertTrue(contact.getGroups().contains(group));
       verifyContactListInUI();
    }
 }

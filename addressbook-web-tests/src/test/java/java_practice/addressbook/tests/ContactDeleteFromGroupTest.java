@@ -52,10 +52,9 @@ public class ContactDeleteFromGroupTest extends TestBase {
       app.contact().selectGroupFilterDropdown(fromGroup.getId());
       app.contact().selectContactById(addedContact.getId());
       app.contact().submitContactDeleteFromGroup();
-      app.goTo().groupPage(fromGroup.getId());
-      Contacts after = app.contact().all();
-      assertThat(after.size(), equalTo(fromGroup.getContacts().size() - 1));
-      Assert.assertFalse(after.contains(addedContact));
+      int fromGroupId = fromGroup.getId();
+      fromGroup = app.db().groups().stream().filter(g -> g.getId() == fromGroupId).findFirst().get();
+      Assert.assertFalse(fromGroup.getContacts().contains(addedContact));
       verifyContactListInUI();
    }
 }
